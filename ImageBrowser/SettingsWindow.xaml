@@ -1,0 +1,61 @@
+<Window x:Class="ImageBrowser.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Preferences" Height="350" Width="500" WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,8,0">Cache Directory:</TextBlock>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CacheDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Grid.Row="0" Grid.Column="2" Margin="8,0,0,0" Padding="6,2" Click="Browse_Click">Browse...</Button>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="0,8,8,0">Background Color:</TextBlock>
+        <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,8,0,0" SelectedValuePath="Content" SelectedValue="{Binding BackgroundColor, Mode=TwoWay}" >
+            <ComboBoxItem>White</ComboBoxItem>
+            <ComboBoxItem>Gray</ComboBoxItem>
+            <ComboBoxItem>Black</ComboBoxItem>
+        </ComboBox>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="0,8,8,0">JPEG Quality:</TextBlock>
+        <Slider Grid.Row="2" Grid.Column="1" Margin="0,8,0,0" Minimum="1" Maximum="100" Value="{Binding JpegQuality, Mode=TwoWay}"/>
+        <TextBlock Grid.Row="2" Grid.Column="2" Margin="8,8,0,0" VerticalAlignment="Center" Text="{Binding JpegQuality}"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="0,8,8,0">Thumbnail Size (px):</TextBlock>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="0,8,0,0" Text="{Binding ThumbnailSize, Mode=TwoWay}"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="0,8,8,0">Images per chunk:</TextBlock>
+        <TextBox Grid.Row="4" Grid.Column="1" Margin="0,8,0,0" Text="{Binding ChunkSize, Mode=TwoWay}"/>
+        <TextBlock Grid.Row="4" Grid.Column="2" Margin="8,8,0,0" VerticalAlignment="Center">Default: 50</TextBlock>
+
+        <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="0,8,8,0">Max concurrency:</TextBlock>
+        <Slider Grid.Row="5" Grid.Column="1" Margin="0,8,0,0" Minimum="1" Maximum="32" Value="{Binding MaxConcurrency, Mode=TwoWay}"/>
+        <TextBlock Grid.Row="5" Grid.Column="2" Margin="8,8,0,0" VerticalAlignment="Center" Text="{Binding MaxConcurrency}"/>
+
+        <TextBlock Grid.Row="6" Grid.ColumnSpan="3" Margin="0,8,0,0" TextWrapping="Wrap">
+            Images per chunk controls how many files are added to the UI in each batch. Larger values reduce UI update frequency but delay first thumbnails. Recommended: 20–200.
+            Max concurrency controls how many thumbnail generation tasks run in parallel. Higher values use more CPU and memory. Recommended: 4–16.
+        </TextBlock>
+
+        <StackPanel Grid.Row="7" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0">
+            <Button Width="80" Margin="0,0,8,0" Click="Ok_Click">OK</Button>
+            <Button Width="80" Click="Cancel_Click">Cancel</Button>
+        </StackPanel>
+
+    </Grid>
+</Window>
